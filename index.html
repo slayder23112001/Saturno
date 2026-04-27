@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saturno | Catálogo</title>
+
+  <!-- Fuente similar al estilo minimalista -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background: #f8f6f2;
+      color: #222;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      background: rgba(13, 13, 13, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: #f4eee6;
+      letter-spacing: 10px;
+      font-size: 28px;
+      font-weight: 300;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      margin-left: -5px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 34px;
+      align-items: center;
+      color: #efe7dc;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .menu a:hover {
+      color: #c99b63;
+    }
+
+    .hero {
+      min-height: 92vh;
+      padding: 130px 25px 70px;
+      background:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.72)),
+        radial-gradient(circle at 75% 70%, #8a5530 0%, #1a120e 28%, #050505 65%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -180px;
+      bottom: -180px;
+      width: 620px;
+      height: 620px;
+      border-radius: 50%;
+      border: 2px solid rgba(201,155,99,.35);
+      box-shadow: 0 0 80px rgba(201,155,99,.25);
+      transform: rotate(-20deg);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .hero-logo span {
+      font-size: clamp(48px, 9vw, 92px);
+      letter-spacing: 20px;
+      font-weight: 300;
+      color: #f5efe7;
+    }
+
+    .hero-logo img {
+      width: clamp(58px, 9vw, 92px);
+      height: clamp(58px, 9vw, 92px);
+      object-fit: contain;
+      margin-left: -18px;
+    }
+
+    .hero h2 {
+      color: #d5a168;
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 600;
+      margin-bottom: 35px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      border: 1px solid #c99b63;
+      color: #f4eee6;
+      padding: 15px 34px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: .3s;
+    }
+
+    .btn-primary:hover {
+      background: #c99b63;
+      color: #111;
+    }
+
+    section {
+      padding: 70px 25px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 30px;
+      letter-spacing: 2px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .line {
+      width: 55px;
+      height: 3px;
+      background: #c99b63;
+      margin: 0 auto 35px;
+      border-radius: 20px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .product-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .product-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 12px;
+      background: #dfd1c1;
+      margin-bottom: 16px;
+    }
+
+    .product-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    .product-card h3 {
+      font-size: 15px;
+      margin-bottom: 9px;
+      font-weight: 700;
+    }
+
+    .product-description {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+
+    .colors {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .color-btn {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.25);
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .color-btn:hover {
+      transform: scale(1.18);
+    }
+
+    .color-btn.active {
+      transform: scale(1.18);
+      box-shadow: 0 0 0 2px #c99b63;
+    }
+
+    .gris { background: #9f9f9f; }
+    .naranja { background: #c56d2f; }
+    .negro { background: #111; }
+    .cafe-claro { background: #c69c6d; }
+    .cafe-oscuro { background: #5b3520; }
+
+    .price {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .btn-details {
+      display: inline-block;
+      border: 1px solid #c99b63;
+      color: #b17d45;
+      padding: 10px 18px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      transition: .3s;
+      text-transform: uppercase;
+    }
+
+    .btn-details:hover {
+      background: #c99b63;
+      color: white;
+    }
+
+    .center {
+      text-align: center;
+      margin-top: 35px;
+    }
+
+    .btn-all {
+      display: inline-block;
+      background: #b98755;
+      color: white;
+      padding: 14px 42px;
+      border-radius: 5px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .benefits {
+      background: #efe8dd;
+      padding: 35px 25px;
+    }
+
+    .benefits-grid {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .benefit {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .about {
+      text-align: center;
+      max-width: 760px;
+      margin: auto;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .contact {
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+
+    .contact p {
+      color: #d5d5d5;
+      margin: 15px auto 30px;
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    .whatsapp {
+      display: inline-block;
+      background: #c99b63;
+      color: #111;
+      padding: 15px 34px;
+      border-radius: 5px;
+      font-weight: 700;
+    }
+
+    footer {
+      background: #070707;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu {
+        gap: 16px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .brand {
+        font-size: 23px;
+        letter-spacing: 7px;
+      }
+
+      .hero-logo span {
+        letter-spacing: 10px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a class="brand" href="#inicio">
+        SATURN<img src="saturno-logo.png" alt="Logo Saturno">
+      </a>
+
+      <div class="menu">
+        <a href="#inicio">INICIO</a>
+        <a href="#productos">PRODUCTOS</a>
+        <a href="#nosotros">NOSOTROS</a>
+        <a href="#contacto">CONTACTO</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <div class="hero-logo">
+          <span>SATURN</span>
+          <img src="saturno-logo.png" alt="Logo Saturno">
+        </div>
+        <h2>Descubre productos fuera de este mundo.</h2>
+        <a class="btn-primary" href="#productos">VER PRODUCTOS</a>
+      </div>
+    </section>
+
+    <section id="productos">
+      <div class="container">
+        <h2 class="section-title">PRODUCTOS DESTACADOS</h2>
+        <div class="line"></div>
+
+        <div class="products-grid">
+
+          <div class="product-card">
+            <img src="pq-20-con-caja.jpg"
+                 onmouseover="this.src='pq-20-solo.jpg'"
+                 onmouseout="this.src='pq-20-con-caja.jpg'"
+                 alt="Power Bank 20000mAh">
+
+            <div class="product-content">
+              <div>
+                <h3>Power Bank 20000mAh</h3>
+                <p class="product-description">
+                  Carga portátil de alta capacidad.
+                </p>
+              </div>
+
+              <div>
+                <span class="price">$30.00</span>
+                <a class="btn-details"
+                   href="https://wa.me/593984066882?text=Hola,%20estoy%20interesado%20en%20Power%20Bank%2020000mAh"
+                   target="_blank">
+                  Comprar este producto
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="pq-25-con-caja.jpg"
+                 onmouseover="this.src='pq-25-solo.jpg'"
+                 onmouseout="this.src='pq-25-con-caja.jpg'"
+                 alt="Power Bank 10000mAh">
+
+            <div class="product-content">
+              <div>
+                <h3>Power Bank 10000mAh</h3>
+                <p class="product-description">
+                  Carga rápida 22.5W.
+                </p>
+              </div>
+
+              <div>
+                <span class="price">$20.00</span>
+                <a class="btn-details"
+                   href="https://wa.me/593984066882?text=Hola,%20estoy%20interesado%20en%20Power%20Bank%2010000mAh"
+                   target="_blank">
+                  Comprar este producto
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="cámara-auto.jpg" alt="Cámara Dual para Autos">
+
+            <div class="product-content">
+              <div>
+                <h3>Cámara Dual para Autos</h3>
+                <p class="product-description">
+                  Graba interior y exterior con claridad.
+                </p>
+              </div>
+
+              <div>
+                <span class="price">$30.00</span>
+                <a class="btn-details"
+                   href="https://wa.me/593984066882?text=Hola,%20estoy%20interesado%20en%20C%C3%A1mara%20Dual"
+                   target="_blank">
+                  Comprar este producto
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="paw-balm.jpg" alt="Paw-Balm">
+
+            <div class="product-content">
+              <div>
+                <h3>Paw-Balm</h3>
+                <p class="product-description">
+                  Protege las patas de tu mascota.
+                </p>
+              </div>
+
+              <div>
+                <span class="price">$7.00</span>
+                <a class="btn-details"
+                   href="https://wa.me/593984066882?text=Hola,%20estoy%20interesado%20en%20Paw-Balm"
+                   target="_blank">
+                  Comprar este producto
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img src="pistola-de-limpieza.jpg" alt="Pistola de limpieza">
+
+            <div class="product-content">
+              <div>
+                <h3>Pistola de limpieza</h3>
+                <p class="product-description">
+                  Limpieza potente para hogar o auto.
+                </p>
+              </div>
+
+              <div>
+                <span class="price">$14.00</span>
+                <a class="btn-details"
+                   href="https://wa.me/593984066882?text=Hola,%20estoy%20interesado%20en%20Pistola%20de%20limpieza"
+                   target="_blank">
+                  Comprar este producto
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <img id="tarjetero-rfid-img" src="tarjetero-con-protección-RFID.jpg" alt="Tarjetero RFID">
+
+            <div class="product-content">
+              <div>
+                <h3>Tarjetero RFID</h3>
+                <p class="product-description">
+                  Billetera slim con protección RFID.
+                </p>
+                <div class="colors" aria-label="Colores disponibles para Tarjetero RFID">
+                  <button class="color-btn negro"
+                          type="button"
+                          title="Negro - imagen principal"
+                          aria-label="Ver Tarjetero RFID negro - imagen principal"
+                          onclick="cambiarColorTarjetero('negro', 'tarjetero-con-protección-RFID.jpg', this)"></button>
+                  <button class="color-btn cafe-claro"
+                          type="button"
+                          title="Café claro"
+                          aria-label="Ver Tarjetero RFID café claro"
+                          onclick="cambiarColorTarjetero('café claro', 'tarjetero-con-protección-RFID-café-claro.png', this)"></button>
+                  <button class="color-btn cafe-oscuro"
+                          type="button"
+                          title="Café oscuro"
+                          aria-label="Ver Tarjetero RFID café oscuro"
+                          onclick="cambiarColorTarjetero('café oscuro', 'tarjetero-con-protección-RFID-café-oscuro.png', this)"></button>
+                  <button class="color-btn negro"
+                          type="button"
+                          title="Negro"
+                          aria-label="Ver Tarjetero RFID negro"
+                          onclick="cambiarColorTarjetero('negro', 'tarjetero-con-protección-RFID-negro.png', this)"></button>
+                </div>
+              </div>
+
+              <div>
+                <span class="price">$13.00</span>
+                <a id="tarjetero-rfid-whatsapp"
+                   class="btn-details"
+                   href="https://wa.me/593984066882?text=Hola,%20estoy%20interesado%20en%20Tarjetero%20RFID%20color%20negro"
+                   target="_blank">
+                  Comprar este producto
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="product-card">
+            <img id="billetera-img" src="billetera-gris.jpg" alt="Billetera Minimalista gris">
+
+            <div class="product-content">
+              <div>
+                <h3>Billetera Minimalista</h3>
+                <p class="product-description">
+                  Despídete de las billeteras pesadas. Diseño inteligente de acceso rápido con estética premium.
+                </p>
+              </div>
+
+              <div>
+                <div class="colors" aria-label="Selecciona el color de la billetera">
+                  <button class="color-btn gris active"
+                          type="button"
+                          aria-label="Color gris"
+                          onclick="cambiarColorBilletera('gris', 'billetera-gris.jpg', this)"></button>
+                  <button class="color-btn naranja"
+                          type="button"
+                          aria-label="Color naranja"
+                          onclick="cambiarColorBilletera('naranja', 'billetera-naranja.jpg', this)"></button>
+                  <button class="color-btn negro"
+                          type="button"
+                          aria-label="Color negro"
+                          onclick="cambiarColorBilletera('negro', 'billetera-negra.jpg', this)"></button>
+                </div>
+                <span class="price">$10.00</span>
+                <a id="billetera-whatsapp"
+                   class="btn-details"
+                   href="https://wa.me/593984066882?text=Hola,%20estoy%20interesado%20en%20Billetera%20Minimalista%20color%20gris"
+                   target="_blank">
+                  Comprar este producto
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="center">
+          <a class="btn-all" href="#contacto">VER TODOS LOS PRODUCTOS</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div class="benefits-grid">
+        <div class="benefit">
+          <strong>Envíos a todo el país</strong>
+          Rápidos y seguros
+        </div>
+        <div class="benefit">
+          <strong>Calidad garantizada</strong>
+          Productos seleccionados
+        </div>
+        <div class="benefit">
+          <strong>Atención personalizada</strong>
+          Estamos para ayudarte
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros">
+      <div class="container">
+        <h2 class="section-title">NOSOTROS</h2>
+        <div class="line"></div>
+        <p class="about">
+          Saturno es un catálogo digital creado para mostrar productos con una imagen elegante, moderna y minimalista. Nuestro objetivo es que puedas ver cada producto de forma clara y pedir información de manera rápida por WhatsApp.
+        </p>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="container">
+        <h2 class="section-title">CONTACTO</h2>
+        <p>¿Te interesa algún producto? Escríbenos por WhatsApp y te ayudamos con disponibilidad, precios y entregas.</p>
+        <a class="whatsapp"
+           href="https://wa.me/593984066882?text=Hola,%20quiero%20información%20sobre%20los%20productos%20de%20Saturno"
+           target="_blank">
+          ESCRIBIR POR WHATSAPP
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Saturno. Todos los derechos reservados.
+  </footer>
+
+
+
+
+  <script>
+    function activarBotonColor(botonSeleccionado) {
+      const contenedor = botonSeleccionado.closest('.colors');
+      contenedor.querySelectorAll('.color-btn').forEach((boton) => {
+        boton.classList.remove('active');
+      });
+      botonSeleccionado.classList.add('active');
+    }
+
+
+    function cambiarColorTarjetero(color, imagen, botonSeleccionado) {
+      const imagenProducto = document.getElementById('tarjetero-rfid-img');
+      const botonWhatsapp = document.getElementById('tarjetero-rfid-whatsapp');
+
+      imagenProducto.src = imagen;
+      imagenProducto.alt = 'Tarjetero RFID ' + color;
+      botonWhatsapp.href = 'https://wa.me/593984066882?text=Hola,%20estoy%20interesado%20en%20Tarjetero%20RFID%20color%20' + encodeURIComponent(color);
+
+      activarBotonColor(botonSeleccionado);
+    }
+
+    function cambiarColorBilletera(color, imagen, botonSeleccionado) {
+      const imagenProducto = document.getElementById('billetera-img');
+      const botonWhatsapp = document.getElementById('billetera-whatsapp');
+
+      imagenProducto.src = imagen;
+      imagenProducto.alt = 'Billetera Minimalista ' + color;
+      botonWhatsapp.href = 'https://wa.me/593984066882?text=Hola,%20estoy%20interesado%20en%20Billetera%20Minimalista%20color%20' + encodeURIComponent(color);
+
+      activarBotonColor(botonSeleccionado);
+    }
+  </script>
+
+</body>
+</html>
